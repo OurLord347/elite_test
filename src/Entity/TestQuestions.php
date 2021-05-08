@@ -33,9 +33,9 @@ class TestQuestions
     private $test_id;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="integer")
      */
-    private $variations;
+    private $step;
 
     public function getId(): ?int
     {
@@ -78,14 +78,14 @@ class TestQuestions
         return $this;
     }
 
-    public function getVariations(): ?string
+    public function getStep(): ?int
     {
-        return $this->variations;
+        return $this->step;
     }
 
-    public function setVariations(?string $variations): self
+    public function setStep(?string $step): self
     {
-        $this->variations = $variations;
+        $this->step = $step;
 
         return $this;
     }

@@ -16,42 +16,25 @@ class Test
      * @ORM\Column(type="integer")
      */
     private $id;
-
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=255)
      */
-    private $child = 0;
+    private $name;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
-    private $parent_test_id;
-
-    public function getParentTestId(): ?string
+    public function getName(): ?string
     {
-        return $this->parent_test_id;
+        return $this->name;
     }
 
-    public function setParentTestId(string $parent_test_id): self
+    public function setName(string $name): self
     {
-        $this->parent_test_id = $parent_test_id;
+        $this->name = $name;
 
         return $this;
     }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getChild(): ?bool
-    {
-        return $this->child;
-    }
-
-    public function setChild(bool $child): self
-    {
-        $this->child = $child;
-
-        return $this;
     }
 }
