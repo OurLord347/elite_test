@@ -63,22 +63,20 @@ class TestController extends AbstractController
             if (empty($questionReq['question'])){
                 throw new \Exception();
             }
-            $questionReq['test_id'] = $this->SaveTest($questionReq);
-
+            if(empty($questionReq['test_id']) || isset($questionReq['create_new_test'])) {
+                $questionReq['test_id'] = $this->SaveTest($questionReq);
+            }
             $question->setQuestion($questionReq['question'])
                 ->setTestId($questionReq['test_id'])
                 ->setType($questionReq['type'])
-                ->setSteep($questionReq['steep']);
+                ->setStep($questionReq['step']);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($question);
             $entityManager->flush();
+            //Если все ок перехожу наглавную
+            return $this->redirect( $this->generateUrl( 'start'));
 
-            $data = [
-                'status' => 200,
-                'success' => "Articles added successfully",
-            ];
-            return $this->response($data);
         }catch (\Exception $e){
             $data = [
                 'status' => 422,

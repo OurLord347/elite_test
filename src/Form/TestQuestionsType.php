@@ -22,17 +22,34 @@ class TestQuestionsType extends AbstractType
             ->add('question',  TextareaType::class, array(
                 'label' => 'Вопрос',
                 'attr' => [
-                    'placeholder' => 'Введите вопрос'
+                    'placeholder' => 'Введите вопрос',
+                    'class' => 'form-control'
                 ]
             ))
             ->add('type', ChoiceType::class, array(
                 'label' => 'Тип вопроса',
                 'mapped' => false,
-                'choices' => array(
+                'choices' => [
                     'Один ответ'=> 'one',
 //                    'Несколько ответов'=> 'many',
                     'Записать овтет' => 'write',
-                )
+                ],
+                'attr' => [
+                    'class' => 'form-control'
+                ]
+            ))
+            ->add('step', ChoiceType::class, array(
+                'label' => 'Ступень',
+                'mapped' => false,
+                'choices' => array(
+                    'Первая '=> '1',
+                    'Вторая'=> '2',
+                    'Третья' => '3',
+                ),
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'required' => false,
             ))
             ->add('test_id', EntityType::class, [
                 // looks for choices from this entity
@@ -40,29 +57,27 @@ class TestQuestionsType extends AbstractType
 
                 // uses the User.username property as the visible option string
                 'choice_label' => 'name',
-
+                'attr' => [
+                    'class' => 'form-control'
+                ]
                 // used to render a select box, check boxes or radios
 //                 'multiple' => true,
                 // 'expanded' => true,
             ])
+
             ->add('create_new_test',  CheckboxType::class, array(
-                'label' => 'Создать новый Тест',
+                'label' => 'Создать новый Тест(если не активно то название теста можно не заполнять)',
+                'required' => false,
             ))
             ->add('test_name',  TextType::class, array(
                 'label' => 'Название теста',
                 'attr' => [
-                    'placeholder' => 'Введите название'
-                ]
+                    'placeholder' => 'Введите название',
+                    'class' => 'form-control'
+                ],
+                'required' => false,
             ))
-            ->add('steep', ChoiceType::class, array(
-                'label' => 'Ступень',
-                'mapped' => false,
-                'choices' => array(
-                    'Первая '=> '1',
-                    'Вторая'=> '2',
-                    'Третья' => '3',
-                )
-            ))
+
             ->add('save', SubmitType::class, array(
                 'label' => 'Сохранить',
                 'attr' => [
